@@ -1,6 +1,7 @@
 import json
 import os
 import csv
+import pdb
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
 
@@ -13,13 +14,13 @@ logger = get_logger()
 
 
 def convert_to_dpr(
-    input_path: Union[str, os.PathLike],
-    output_path: Union[str, os.PathLike],
-    documents_path: Optional[Union[str, os.PathLike]] = None,
-    title_map: Optional[Union[str, os.PathLike]] = None,
-    label_type: Optional[bool] = False,
+        input_path: Union[str, os.PathLike],
+        output_path: Union[str, os.PathLike],
+        documents_path: Optional[Union[str, os.PathLike]] = None,
+        title_map: Optional[Union[str, os.PathLike]] = None,
+        label_type: Optional[bool] = False,
 ) -> List[Dict[str, Any]]:
-    documents:DocumentStore = {}
+    documents: DocumentStore = {}
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     # read entities definitions
@@ -34,13 +35,13 @@ def convert_to_dpr(
     # infer document type
     document_file_type = Path(documents_path).suffix[1:]
     if document_file_type == "jsonl":
-        documents:DocumentStore = DocumentStore.from_file(documents_path)
+        documents: DocumentStore = DocumentStore.from_file(documents_path)
     elif document_file_type == "csv":
-        documents:DocumentStore = DocumentStore.from_tsv(
+        documents: DocumentStore = DocumentStore.from_tsv(
             documents_path, delimiter=",", quoting=csv.QUOTE_NONE, ingore_case=True
         )
     elif document_file_type == "tsv":
-        documents:DocumentStore = DocumentStore.from_tsv(
+        documents: DocumentStore = DocumentStore.from_tsv(
             documents_path, delimiter="\t", quoting=csv.QUOTE_NONE, ingore_case=True
         )
     else:
@@ -55,10 +56,11 @@ def convert_to_dpr(
     # store dpr data
     dpr = []
     # lower case titles
-    import pdb
-    pdb.set_trace()
-    title_to_lower_map = {title.lower(): title for title in documents.keys()}
-    # title_to_lower_map = {title.lower(): title for title in documents._documents_index}
+    # import pdb
+    # pdb.set_trace()
+    # title_to_lower_map = {title.lower(): title for title in documents.keys()}
+    title_to_lower_map = {curr_doc['text'].lower(): curr_doc['text']
+                          for _, curr_doc in documents._documents_index.items()}
     # store missing entities
     missing = set()
     # Read input file
@@ -76,6 +78,7 @@ def convert_to_dpr(
                     relation = relation.strip().lower()
                     relation = title_to_lower_map.get(relation, relation)
                     if relation in documents:
+                        pdb.set_trace()
                         def_text = documents[relation]
                         positive_pssgs.append(
                             {

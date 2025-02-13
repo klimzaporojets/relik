@@ -47,6 +47,11 @@ PYTHONPATH=. python scripts/data/retriever/convert_to_dpr.py \
   /home/klim/storage/relik/data/blink/processed/blink-train-kilt-relik-windowed.jsonl \
   /home/klim/storage/relik/data/blink/processed/blink-train-kilt-relik-windowed-dpr.jsonl \
   index/documents.jsonl
+
 ```
 
-Working on ```s01_test_relik.py```
+Working on ```s01_test_relik.py```:
+```
+PYTHONPATH=. python relik/s01_test_relik.py \
+  --model_name sapienzanlp/relik-entity-linking-large
+```
