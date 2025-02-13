@@ -38,7 +38,7 @@ if __name__ == '__main__':
     ####
     ####
     args = parser.parse_args()
-    config = json.load(open(args.config_file, 'rt'))
+    # config = json.load(open(args.config_file, 'rt'))
 
     relik = Relik.from_pretrained(args.model_name)
     pdb.set_trace()
