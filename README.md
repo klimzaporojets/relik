@@ -896,7 +896,8 @@ with `push_to_hub=True` the model will be pushed to the 🤗 Hugging Face Hub wi
 The reader can be loaded from a repo id or a local path:
 
 ```python
-from relik.reader import RelikReaderForSpanExtraction, RelikReaderForTripletExtraction
+from relik.reader.pytorch_modules.span import RelikReaderForSpanExtraction
+from relik.reader.pytorch_modules.triplet import RelikReaderForTripletExtraction
 
 # the reader for span extraction
 reader_span = RelikReaderForSpanExtraction(
