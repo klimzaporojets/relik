@@ -689,7 +689,6 @@ class Relik:
             cache_dir=cache_dir,
             force_download=force_download,
         )
-        pdb.set_trace()
         config_path = model_dir / config_file_name
         if not config_path.exists():
             raise FileNotFoundError(
