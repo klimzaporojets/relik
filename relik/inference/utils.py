@@ -310,6 +310,8 @@ def load_index(
             **kwargs,
         )
     if task in [TaskType.TRIPLET, TaskType.BOTH]:
+        import pdb
+        pdb.set_trace()
         _index[TaskType.TRIPLET] = _instantiate_index(
             index[TaskType.TRIPLET],
             device,
