@@ -46,6 +46,9 @@ class GoldenRetrieverConfig(PretrainedConfig):
         self.position_embedding_type = position_embedding_type
         self.use_cache = use_cache
         self.classifier_dropout = classifier_dropout
+        # transformers 5: PretrainedConfig no longer defines these BERT defaults
+        self.is_decoder = getattr(self, "is_decoder", False)
+        self.add_cross_attention = getattr(self, "add_cross_attention", False)
 
 
 class GoldenRetrieverModel(BertModel):

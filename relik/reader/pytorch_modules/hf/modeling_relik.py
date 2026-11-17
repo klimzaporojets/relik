@@ -4,7 +4,7 @@ import torch
 from transformers import AutoModel, PreTrainedModel
 from transformers.activations import ClippedGELUActivation, GELUActivation
 from transformers.configuration_utils import PretrainedConfig
-from transformers.modeling_utils import PoolerEndLogits
+from relik.reader.pytorch_modules.hf._compat_pooler import PoolerEndLogits
 
 from .configuration_relik import RelikReaderConfig
 
